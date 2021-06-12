@@ -9,8 +9,9 @@ if (dotenv.error) {
 
 const cluster = require('cluster');
 const totalCPUs = require('os').cpus().length;
+const CategoryRoutes = require('./routes/category.routes');
 
-if (cluster.isMaster){
+if (cluster.isMaster) {
     console.log(`Number of CPUs is ${totalCPUs}`);
     console.log(`Master ${process.pid} is running`);
 
@@ -21,13 +22,15 @@ if (cluster.isMaster){
 
     cluster.on('exit', (worker, code, signal) => {
         console.log(`worker ${worker.process.pid} died`);
-        console.log("Let's fork another worker!");
+        console.log('Let\'s fork another worker!');
         cluster.fork();
     });
 
 } else {
     const app = new Koa();
     console.log(`Worker ${process.pid} started`);
+
+    app.use(CategoryRoutes.routes()).use(CategoryRoutes.allowedMethods());
 
     /* testing purposes. */
     app.use(ctx => {
