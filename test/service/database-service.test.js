@@ -15,18 +15,17 @@ const DatabaseService = require('../../src/service/database.service');
 const databaseService = new DatabaseService('category');
 
 const category1 = {
-    _id: 'SHORT_TRIP',
     name: 'Short Trip',
     minKM: 0,
     maxKM: 10,
     perKMCharge: 50.00
 };
 
-// test('Test Case: Insert a new category ', () => {
-//     return databaseService.save(category1).then(data => {
-//         expect(data.insertedId).toBe(category1._id);
-//     });
-// });
+test('Test Case: Insert a new category ', () => {
+    return databaseService.save(category1).then(data => {
+        expect(data.insertedId).toBe(category1._id);
+    });
+});
 
 /* duplicate ID error should be thrown here because same category is entered here again.
 * MongoError: E11000 duplicate key error collection:

@@ -4,10 +4,10 @@
 */
 
 const DatabaseService = require('../service/database.service');
-const databaseService = new DatabaseService('category');
+const databaseService = new DatabaseService('vehicle');
 
-/* get all categories. */
-const getAllCategories = () => {
+/* get all vehicles. */
+const getAllVehicles = () => {
     return new Promise(async (resolve, reject) => {
         try {
             resolve(await databaseService.findAll());
@@ -17,8 +17,8 @@ const getAllCategories = () => {
     });
 };
 
-/* get category by ID. */
-const getCategoryByID = (id) => {
+/* get vehicle by ID. */
+const getVehicleByID = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             resolve(await databaseService.findById(id));
@@ -28,11 +28,21 @@ const getCategoryByID = (id) => {
     });
 };
 
-/* add new category. */
-const addCategory = (categoryObject) => {
+/* add new vehicle. */
+const addVehicle = (vehicleObject) => {
     return new Promise(async (resolve, reject) => {
         try {
-            resolve(await databaseService.save(categoryObject));
+            resolve(await databaseService.save(vehicleObject));
+        } catch (error) {
+            reject(error);
+        }
+    });
+};
+
+const dropTheCollection = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await databaseService.dropTheCollection();
         } catch (error) {
             reject(error);
         }
@@ -40,8 +50,8 @@ const addCategory = (categoryObject) => {
 };
 
 module.exports = {
-    getAllCategories,
-    getCategoryByID,
-    addCategory
+    getAllVehicles,
+    getVehicleByID,
+    addVehicle,
+    dropTheCollection
 };
-
