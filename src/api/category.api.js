@@ -3,19 +3,21 @@
 @date : 12/06/2021
 */
 
+const CategoryDAO = require('../dal/category.dao');
+
 /* get all categories. */
-const getCategory = () => {
-    /* TODO: implementation */
+const getAllCategories = () => {
+    return CategoryDAO.getAllCategories();
 };
 
 /* get category by ID. */
-const getCategoryByID = () => {
-    /* TODO: implementation */
+const getCategoryByID = (id) => {
+    return CategoryDAO.getCategoryByID(id);
 };
 
 /* create a new category. */
-const addCategory = () => {
-    /* TODO: implementation */
+const addCategory = (categoryObject) => {
+    return CategoryDAO.addCategoryD(categoryObject);
 };
 
 /* update a existing category. */
@@ -30,7 +32,7 @@ const addCategory = () => {
 
 /* exposing methods. */
 module.exports = {
-    getCategory,
+    getAllCategories,
     getCategoryByID,
     addCategory
 };
