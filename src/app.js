@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const KoaBody = require('koa-body');
 
 const dotenv = require('dotenv').config({path: 'resources/.env'});
 require('./util/database.util'); // load database.util
@@ -28,6 +29,8 @@ if (cluster.isMaster) {
 
 } else {
     const app = new Koa();
+    /* enable koa-body. */
+    app.use(KoaBody({}));
     console.log(`Worker ${process.pid} started`);
 
     app.use(CategoryRoutes.routes()).use(CategoryRoutes.allowedMethods());
