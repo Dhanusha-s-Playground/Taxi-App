@@ -1,6 +1,11 @@
 const Koa = require('koa');
 
-require('dotenv').config({path: 'resources/.env'});
+const dotenv = require('dotenv').config({path: 'resources/.env'});
+require('./util/database.util'); // load database.util
+
+if (dotenv.error) {
+    throw dotenv.error;
+}
 
 const cluster = require('cluster');
 const totalCPUs = require('os').cpus().length;
