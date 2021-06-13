@@ -15,9 +15,10 @@ const VehicleDAO = require('../../src/dal/vehicle.dao');
 // load database.util
 require('../../src/util/database.util');
 
-// afterAll( () => {
-//     VehicleDAO.dropTheCollection().then(console.log).catch(console.error)
-// });
+/* drop the collection after the test completed. */
+afterAll( () => {
+    VehicleDAO.dropTheCollection().then(console.log).catch(console.error)
+});
 
 const vehicleObject = {
     _id: 'ABC-4567',
@@ -30,5 +31,11 @@ const vehicleObject = {
 test('Test Case: Insert a new Vehicle', () => {
     return VehicleDAO.addVehicle(vehicleObject).then(data => {
         expect(data.insertedId).toBe(vehicleObject._id);
+    });
+});
+
+test('Test Case: Get Inserted Vehicle Record', () => {
+    return VehicleDAO.getVehicleByID(vehicleObject._id).then(data => {
+        expect(data).toStrictEqual(vehicleObject);
     });
 });
