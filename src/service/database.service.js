@@ -113,4 +113,14 @@ module.exports = class DatabaseService {
         });
     }
 
-}
+    dropTheCollection() {
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(this.collection.drop());
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
+};

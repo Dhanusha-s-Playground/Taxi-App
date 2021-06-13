@@ -17,7 +17,7 @@ const getCategoryByID = (id) => {
 
 /* create a new category. */
 const addCategory = (categoryObject) => {
-    return CategoryDAO.addCategoryD(categoryObject);
+    return CategoryDAO.addCategory(categoryObject);
 };
 
 /* update a existing category. */
